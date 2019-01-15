@@ -20,10 +20,9 @@ node {
     }
     stage('Deploy'){
       if(env.BRANCH_NAME == 'master'){
-        sh 'docker build -t react-app --no-cache .'
-        sh 'docker tag react-app localhost:5000/react-app'
-        sh 'docker push localhost:5000/react-app'
-        sh 'docker rmi -f react-app localhost:5000/react-app'
+        docker.withRegistry('https://index.docker.io/v1/', '218de882-021c-45d2-83e0-5c3ee8fdf6e6') {
+          def app = docker.build("isthisreallife/node_js-example", '.').push()
+        }
       }
     }
   }
