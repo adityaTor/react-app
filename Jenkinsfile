@@ -9,10 +9,9 @@ node {
       sh 'docker -v'
       sh 'printenv'
     }
-    stage('Build Docker test'){
+    stage('Docker Build & test'){
       def testImage = docker.build("react-test", "-f Dockerfile.test .")
-    }
-    stage('Docker test'){
+
       testImage.withRun('--rm'){}
     }
     stage('Clean Docker test'){
