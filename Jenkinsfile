@@ -10,7 +10,7 @@ node {
       sh 'printenv'
     }
     stage('Build Docker test'){
-      def testImage = docker.build("react-test", "Dockerfile.test")
+      def testImage = docker.build("react-test", "-f Dockerfile.test .")
     }
     stage('Docker test'){
       sh "docker run --rm ${testImage}"
