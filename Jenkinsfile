@@ -13,7 +13,7 @@ node {
       def testImage = docker.build("react-test", "-f Dockerfile.test .")
     }
     stage('Docker test'){
-      sh "docker run --rm ${testImage}"
+      testImage.withRun('--rm'){}
     }
     stage('Clean Docker test'){
       sh 'docker rmi react-test'
